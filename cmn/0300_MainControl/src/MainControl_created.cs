@@ -18,7 +18,7 @@ public partial class MainControl : StateManager {
         }
         if (!HasNextState())
         {
-            SetNextState(S_WAIT_BASE_READY);
+            SetNextState(S_APP_INIT_START);
         }
         if (HasNextState())
         {
@@ -106,9 +106,11 @@ public partial class MainControl : StateManager {
         if (bFirst)
         {
         }
+        br_DBGMENU(S_EXEC_DBGMENU);
         br_BUT05(S_DISPEROR);
         if (HasNextState())
         {
+                NoWait();
             GoNextState();
         }
     }
@@ -125,6 +127,44 @@ public partial class MainControl : StateManager {
         if (!HasNextState())
         {
             SetNextState(S_WAIT_BUT);
+        }
+        if (HasNextState())
+        {
+            GoNextState();
+        }
+    }
+    /*
+        S_EXEC_DBGMENU
+        デバッグメニューの実行
+    */
+    void S_EXEC_DBGMENU(bool bFirst)
+    {
+        if (bFirst)
+        {
+            exec_dbgmenu();
+        }
+        if (!HasNextState())
+        {
+            SetNextState(S_WAIT_BUT);
+        }
+        if (HasNextState())
+        {
+            GoNextState();
+        }
+    }
+    /*
+        S_APP_INIT_START
+        アプリ側初期化開始
+    */
+    void S_APP_INIT_START(bool bFirst)
+    {
+        if (bFirst)
+        {
+            app_init_start();
+        }
+        if (!HasNextState())
+        {
+            SetNextState(S_WAIT_BASE_READY);
         }
         if (HasNextState())
         {

@@ -86,6 +86,24 @@ public partial class DbgMenuControl : UIControlApi {
         }
     }
     /*
+        S_WAIT_REQ
+        要求待ち
+    */
+    void S_WAIT_REQ(bool bFirst)
+    {
+        if (bFirst)
+        {
+        }
+        if (!HasNextState())
+        {
+            SetNextState(S_END);
+        }
+        if (HasNextState())
+        {
+            GoNextState();
+        }
+    }
+    /*
         S_BUT06
         button 01 作成
     */
@@ -98,7 +116,7 @@ public partial class DbgMenuControl : UIControlApi {
             set_pivot("TC");
             set_size(IT.W, IT.H);
             set_pos(IT.X,IT.Y);
-            set_text(IT.NAME);
+            set_text(IT.TEXT);
         }
         set_event();
         if (!HasNextState())
@@ -140,7 +158,7 @@ public partial class DbgMenuControl : UIControlApi {
             next_loop();
         }
         br_YES(S_BUT06);
-        br_NO(S_END);
+        br_NO(S_WAIT_REQ);
         if (HasNextState())
         {
             GoNextState();

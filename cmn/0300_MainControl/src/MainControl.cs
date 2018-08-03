@@ -1,8 +1,14 @@
 ﻿using System;
 
 public partial class MainControl  {
-		
-	// write your code 
+
+	//app側連携
+	public static Action m_app_init_start;
+	void app_init_start()
+	{
+		if (m_app_init_start!=null) m_app_init_start();
+	}
+
     bool base_isready()
     {
         return BaseProcess.V!=null;
@@ -21,7 +27,23 @@ public partial class MainControl  {
         UIControl.V.ReqStart();
     }
 
-
+    string m_dbgmenu_buttonname;
+    void br_DBGMENU(Action<bool> st)
+    {
+        if (!HasNextState())
+        {
+            var cur = MainStateEvent.Cur();
+            if (cur!=null && cur.id == MainStateEventId.BUTTON && DbgMenuControl.V.IsDbgMenuAction(cur.name))
+            { 
+                m_dbgmenu_buttonname = cur.name;
+                SetNextState(st);
+            }
+        }
+    }
+    void exec_dbgmenu()
+    {
+        DbgMenuControl.V.CallAction(m_dbgmenu_buttonname);
+    }
 
 	void br_BUT05(Action<bool> st)
     {

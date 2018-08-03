@@ -1,15 +1,19 @@
-﻿//  psggConverterLib.dll converted from MainControl.xlsx. 
-public partial class MainControl : StateManager {
+﻿//  psggConverterLib.dll converted from DbgMenuControl.xlsx. 
+public partial class DbgMenuControl : UIControlApi {
 
     public void Start()
     {
         Goto(S_START);
     }
+    public bool IsEnd()
+    {
+        return CheckState(S_END);
+    }
+
 
 
     /*
         S_START
-        開始
     */
     void S_START(bool bFirst)
     {
@@ -18,7 +22,7 @@ public partial class MainControl : StateManager {
         }
         if (!HasNextState())
         {
-            SetNextState(S_WAIT_BASE_READY);
+            SetNextState(S_INIT);
         }
         if (HasNextState())
         {
@@ -27,7 +31,6 @@ public partial class MainControl : StateManager {
     }
     /*
         S_END
-        終了
     */
     void S_END(bool bFirst)
     {
@@ -40,18 +43,23 @@ public partial class MainControl : StateManager {
         }
     }
     /*
-        S_WAIT_BASE_READY
-        BASEの準備待ち
+        S_CREATE_PANEL
+        パネル生成
     */
-    void S_WAIT_BASE_READY(bool bFirst)
+    void S_CREATE_PANEL(bool bFirst)
     {
         if (bFirst)
         {
+            create("PNL_DBGMENU","Scroll View");
+            set_anchor("MC");
+            set_pivot("MC");
+            set_size(640,500);
+            set_pos(0,0);
         }
-        if (!base_isready()) return;
+        set_content_to_parent();
         if (!HasNextState())
         {
-            SetNextState(S_BASE_INIT);
+            SetNextState(S_0001);
         }
         if (HasNextState())
         {
@@ -59,19 +67,18 @@ public partial class MainControl : StateManager {
         }
     }
     /*
-        S_BASE_INIT
-        ベース初期化
+        S_INIT
+        init
     */
-    void S_BASE_INIT(bool bFirst)
+    void S_INIT(bool bFirst)
     {
         if (bFirst)
         {
-            base_init();
+            setup();
         }
-        if (!base_init_done()) return;
         if (!HasNextState())
         {
-            SetNextState(S_UI_START);
+            SetNextState(S_CREATE_PANEL);
         }
         if (HasNextState())
         {
@@ -79,18 +86,23 @@ public partial class MainControl : StateManager {
         }
     }
     /*
-        S_UI_START
-        UI開始
+        S_BUT06
+        button 01 作成
     */
-    void S_UI_START(bool bFirst)
+    void S_BUT06(bool bFirst)
     {
         if (bFirst)
         {
-            ui_start();
+            create(IT.NAME,"Button");
+            set_anchor("TC");
+            set_pivot("TC");
+            set_size(IT.W, IT.H);
+            set_pos(IT.X,IT.Y);
+            set_text(IT.NAME);
         }
         if (!HasNextState())
         {
-            SetNextState(S_WAIT_BUT);
+            SetNextState(S_LOOPCHECK);
         }
         if (HasNextState())
         {
@@ -98,34 +110,36 @@ public partial class MainControl : StateManager {
         }
     }
     /*
-        S_WAIT_BUT
-        Wait for new button
+        S_0001
+        デバッグメニューの準備
     */
-    void S_WAIT_BUT(bool bFirst)
+    void S_0001(bool bFirst)
     {
         if (bFirst)
         {
+            dbgmenu_setup();
         }
-        br_BUT05(S_DISPEROR);
+        if (!HasNextState())
+        {
+            SetNextState(S_BUT06);
+        }
         if (HasNextState())
         {
             GoNextState();
         }
     }
     /*
-        S_DISPEROR
-        Diplay Error
+        S_LOOPCHECK
+        ループ確認
     */
-    void S_DISPEROR(bool bFirst)
+    void S_LOOPCHECK(bool bFirst)
     {
         if (bFirst)
         {
-            disp_error();
+            next_loop();
         }
-        if (!HasNextState())
-        {
-            SetNextState(S_WAIT_BUT);
-        }
+        br_YES(S_BUT06);
+        br_NO(S_END);
         if (HasNextState())
         {
             GoNextState();

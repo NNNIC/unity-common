@@ -1783,14 +1783,14 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.077346265
+    y: 0
     width: 1
-    height: 0.84530747
+    height: 1
   near clip plane: 1
   far clip plane: 150
   field of view: 60
   orthographic: 1
-  orthographic size: 749.21875
+  orthographic size: 568
   m_Depth: 11
   m_CullingMask:
     serializedVersion: 2
@@ -1874,7 +1874,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 640, y: 1498.4375}
+  m_SizeDelta: {x: 640, y: 1136}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &905101312
 MonoBehaviour:
@@ -2302,7 +2302,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 640, y: 1498.4375}
+  m_SizeDelta: {x: 640, y: 1136}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &988779700
 GameObject:
@@ -3150,14 +3150,14 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.077346265
+    y: 0
     width: 1
-    height: 0.84530747
+    height: 1
   near clip plane: 1
   far clip plane: 150
   field of view: 60
   orthographic: 1
-  orthographic size: 749.21875
+  orthographic size: 568
   m_Depth: 50
   m_CullingMask:
     serializedVersion: 2
@@ -3840,8 +3840,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1518913066}
   - component: {fileID: 1518913067}
-  - component: {fileID: 1518913068}
   - component: {fileID: 1518913069}
+  - component: {fileID: 1518913070}
+  - component: {fileID: 1518913068}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -3875,7 +3876,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcd129484a892214585a7600d964f8b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_tc: {fileID: 0}
+  m_tcs: []
   m_state: 0
 --- !u!114 &1518913068
 MonoBehaviour:
@@ -3885,9 +3886,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1518913065}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 650cfa580db67c942aeffd66d56b5250, type: 3}
+  m_Script: {fileID: 11500000, guid: 94a4478bde7b9cd478598f42d1fa94aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_control_name: DbgMenuControl
   m_target: {fileID: 905101314}
   m_template: {fileID: 1931261286}
 --- !u!114 &1518913069
@@ -3905,6 +3907,20 @@ MonoBehaviour:
   - UI/sprites
   m_sprite_list: []
   m_state: 0
+--- !u!114 &1518913070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1518913065}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94a4478bde7b9cd478598f42d1fa94aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_control_name: UITest01Control
+  m_target: {fileID: 905101314}
+  m_template: {fileID: 1931261286}
 --- !u!1 &1555762447
 GameObject:
   m_ObjectHideFlags: 0
@@ -4875,8 +4891,8 @@ RectTransform:
   m_Father: {fileID: 1555762448}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 117.00006}
-  m_SizeDelta: {x: 0, y: 300}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 640, y: 300}
   m_Pivot: {x: 0, y: 1}

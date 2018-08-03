@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,19 +7,21 @@ using UnityEngine.UI;
 public class UIControl : MonoBehaviour {
 
     [HideInInspector]
-    public UIControlCompo m_tc;
+    public UIControlWorkCompo[] m_tcs;
 
     public static UIControl V;
+
+    #region process
     [HideInInspector]
-    public ProcessState m_state = ProcessState.UNKNOWN;
-    
+    public ProcessState m_state = ProcessState.UNKNOWN;    
     public void ReqStart()
     {
         m_state = ProcessState.STARTING;
     }
+    #endregion
 
-	// Use this for initialization
-	IEnumerator Start () {
+    // Use this for initialization
+    IEnumerator Start () {
         V = this;
         m_state = ProcessState.WAIT_START;
 
@@ -32,19 +35,27 @@ public class UIControl : MonoBehaviour {
         UISpriteManager.V.ReqStart();
         while(UISpriteManager.V.m_state != ProcessState.RUNNING) yield return null;
 
-        m_tc = GetComponent<UIControlCompo>();
-        m_tc.SetTarget_TemplateAndStart();
-
+        m_tcs = GetComponents<UIControlWorkCompo>();
+        foreach(var tc in m_tcs)
+        { 
+            if (tc.enabled)
+            { 
+                tc.SetTarget_TemplateAndStart();
+            }
+        }
         m_state = ProcessState.RUNNING;
 
         while(true)
         {
-            if (m_tc.IsEnd()) break;
+            var b =Array.TrueForAll(m_tcs,tc=> {
+                return tc.enabled==false || tc.IsEnd();
+            });
+            if (b) break;
 
             yield return null;
         }
 
-        Debug.Log("..END !!");
+        UnityEngine.Debug.Log("..END !!");
 	}
 	
 }

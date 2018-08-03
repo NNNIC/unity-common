@@ -1,9 +1,13 @@
-﻿// psggConverterLib.dll converted from UITest01Control.xlsx. 
-public partial class UITest01Control : StateManager {
+﻿//  psggConverterLib.dll converted from UITest01Control.xlsx. 
+public partial class UITest01Control : UIControlApi {
 
     public void Start()
     {
         Goto(S_START);
+    }
+    public bool IsEnd()
+    {
+        return CheckState(S_END);
     }
 
 

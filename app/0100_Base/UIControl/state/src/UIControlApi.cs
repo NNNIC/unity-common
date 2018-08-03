@@ -76,6 +76,15 @@ public class UIControlApi : StateManager {
             UGuiUtil.SetSprite(m_latest_rt,sprite);
         }
     }
+    protected void set_event()
+    {
+        UGuiAppUtil.setup_imported_ui_button(m_latest.transform);
+        UGuiAppUtil.setup_imported_ui_toggle(m_latest.transform);
+        UGuiAppUtil.setup_imported_ui_slider(m_latest.transform);
+        UGuiAppUtil.setup_imported_ui_scrollbar(m_latest.transform);
+        UGuiAppUtil.setup_imported_ui_inputfield(m_latest.transform);
+        UGuiAppUtil.setup_imported_ui_scrollview(m_latest.transform);
+    }
     protected bool _get_anchorpos(string anchorstr, out float x, out float y)
     {
         x = 0f;

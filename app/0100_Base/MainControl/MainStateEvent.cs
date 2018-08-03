@@ -7,7 +7,15 @@ public enum MainStateEventId {
     UNKNOWN,
     USER,
 
-    BUTTON
+    BUTTON,
+    TOGGLE,
+    SLIDER,
+    SCROLLBAR,
+
+    INPUTFIELD_CHANGE,
+    INPUTFIELD_END,
+
+    SCROLLVIEW
 
 }
 
@@ -42,7 +50,17 @@ public class MainStateEvent
             m_cur = null;
         }
 
-        if (m_cur!=null) Debug.Log(m_cur.id.ToString() + ":" +   m_cur.name);
+        if (m_cur!=null) 
+        {
+            if (m_cur.name!=null && m_cur.obj!=null)
+            {
+                Debug.Log(m_cur.id.ToString() + ":" +   m_cur.name +"-->" + m_cur.obj.ToString());
+            }
+            else 
+            {
+                Debug.Log(m_cur.id.ToString() + ":" +   m_cur.name);
+            }
+        }
     }
     public static MainStateEvent Cur() { return m_cur; }    
 }

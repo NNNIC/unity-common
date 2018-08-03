@@ -100,6 +100,7 @@ public partial class DbgMenuControl : UIControlApi {
             set_pos(IT.X,IT.Y);
             set_text(IT.NAME);
         }
+        set_event();
         if (!HasNextState())
         {
             SetNextState(S_LOOPCHECK);

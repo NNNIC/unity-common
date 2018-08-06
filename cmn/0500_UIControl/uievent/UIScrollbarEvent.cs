@@ -8,6 +8,6 @@ public class UIScrollbarEvent : MonoBehaviour {
 	public void Change(float val)
     {
 		var scrollbar = GetComponent<Scrollbar>();
-        MainStateEvent.Push(MainStateEventId.SCROLLBAR,HierarchyUtility.GetAbsoluteNodePath(gameObject), val);
+        MainEventMachine.V.PushEvent(MainStateEventId.SCROLLBAR,HierarchyUtility.GetAbsoluteNodePath(gameObject), val);
     }	
 }

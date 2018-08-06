@@ -3838,8 +3838,7 @@ GameObject:
   - component: {fileID: 1518913066}
   - component: {fileID: 1518913067}
   - component: {fileID: 1518913069}
-  - component: {fileID: 1518913070}
-  - component: {fileID: 1518913068}
+  - component: {fileID: 1518913071}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -3873,22 +3872,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcd129484a892214585a7600d964f8b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_tcs: []
   m_state: 0
---- !u!114 &1518913068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1518913065}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94a4478bde7b9cd478598f42d1fa94aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_control_name: DbgMenuControl
-  m_target: {fileID: 905101314}
-  m_template: {fileID: 1931261286}
 --- !u!114 &1518913069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3904,18 +3888,17 @@ MonoBehaviour:
   - UI/sprites
   m_sprite_list: []
   m_state: 0
---- !u!114 &1518913070
+--- !u!114 &1518913071
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1518913065}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94a4478bde7b9cd478598f42d1fa94aa, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f0b2138d502a324b994722871c4fba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_control_name: UITest01Control
   m_target: {fileID: 905101314}
   m_template: {fileID: 1931261286}
 --- !u!1 &1555762447
@@ -4844,7 +4827,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2069242899}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3500205a4e6691543bd5a42e32f37e5e, type: 3}
+  m_Script: {fileID: 11500000, guid: 61edd1e22d1265e4ba2e8f5a45491218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &2069242901

@@ -77,6 +77,7 @@ public partial class UITest01Control : UIControlApi {
             set_pos(0,-100);
             set_text("BUT01");
         }
+        set_event();
         if (!HasNextState())
         {
             SetNextState(S_BUT02);
@@ -102,6 +103,7 @@ public partial class UITest01Control : UIControlApi {
             set_pos(0,-200);
             set_text("BUT02");
         }
+        set_event();
         if (!HasNextState())
         {
             SetNextState(S_BUT03);
@@ -127,6 +129,7 @@ public partial class UITest01Control : UIControlApi {
             set_pos(0,-300);
             set_text("BUT03");
         }
+        set_event();
         if (!HasNextState())
         {
             SetNextState(S_BUT04);
@@ -152,6 +155,7 @@ public partial class UITest01Control : UIControlApi {
             set_pos(0,-400);
             set_text("BUT04");
         }
+        set_event();
         if (!HasNextState())
         {
             SetNextState(S_BUT05);
@@ -202,6 +206,7 @@ public partial class UITest01Control : UIControlApi {
             set_pos(0,-500);
             set_text("BUT05");
         }
+        set_event();
         if (!HasNextState())
         {
             SetNextState(S_BUT_A);
@@ -228,6 +233,7 @@ public partial class UITest01Control : UIControlApi {
             set_text_clr();
             set_sprite("m_C");
         }
+        set_event();
         if (!HasNextState())
         {
             SetNextState(S_BUT_D);
@@ -254,6 +260,7 @@ public partial class UITest01Control : UIControlApi {
             set_text_clr();
             set_sprite("m_D");
         }
+        set_event();
         if (!HasNextState())
         {
             SetNextState(S_BUT_E);
@@ -280,6 +287,7 @@ public partial class UITest01Control : UIControlApi {
             set_text_clr();
             set_sprite("m_B");
         }
+        set_event();
         if (!HasNextState())
         {
             SetNextState(S_BUT_C);
@@ -306,6 +314,7 @@ public partial class UITest01Control : UIControlApi {
             set_text_clr();
             set_sprite("m_A");
         }
+        set_event();
         if (!HasNextState())
         {
             SetNextState(S_BUT_B);
@@ -332,6 +341,7 @@ public partial class UITest01Control : UIControlApi {
             set_text_clr();
             set_sprite("m_E");
         }
+        set_event();
         if (!HasNextState())
         {
             SetNextState(S_END);

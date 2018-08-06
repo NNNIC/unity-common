@@ -15,7 +15,7 @@ public partial class MainControl  {
     }
 
     void base_init() {
-        BaseProcess.V.ReqStart();
+        BaseProcess.V.Kick();
     }
 
     bool base_init_done()
@@ -24,7 +24,7 @@ public partial class MainControl  {
     }
 
     void ui_start() {
-        UIControl.V.ReqStart();
+        UIControl.V.Kick();
     }
 
     string m_dbgmenu_buttonname;
@@ -32,8 +32,8 @@ public partial class MainControl  {
     {
         if (!HasNextState())
         {
-            var cur = MainStateEvent.Cur();
-            if (cur!=null && cur.id == MainStateEventId.BUTTON && DbgMenuControl.V.IsDbgMenuAction(cur.name))
+            var cur = (MainStateEvent)m_eventman.CUR;
+            if (cur!=null && cur.id == MainStateEventId.BUTTON && DbgMenuControl.V!=null && DbgMenuControl.V.IsDbgMenuAction(cur.name))
             { 
                 m_dbgmenu_buttonname = cur.name;
                 SetNextState(st);
@@ -49,7 +49,7 @@ public partial class MainControl  {
     {
         if (!HasNextState())
         {
-            var cur = MainStateEvent.Cur();
+            var cur = (MainStateEvent)m_eventman.CUR;
             if (cur!=null && cur.id == MainStateEventId.BUTTON && cur.name == "BUT05" )
             { 
                 SetNextState(st);

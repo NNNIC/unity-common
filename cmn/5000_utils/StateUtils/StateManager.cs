@@ -2,12 +2,19 @@ using System;
 using UnityEngine;
 public class StateManager
 {
+    protected EventManager m_eventman;
+
     Action<bool> m_curfunc;
     Action<bool> m_nextfunc;
     Action<bool> m_tempfunc;
 
     bool         m_noWait;
     
+    public virtual void Start() { }
+    public virtual bool IsEnd() {  return true; }
+
+    public void SetEventMan(EventManager eventman) { m_eventman = eventman; }
+
     public void update()
     {
         while(true)

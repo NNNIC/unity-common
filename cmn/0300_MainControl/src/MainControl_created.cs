@@ -1,10 +1,16 @@
 ﻿//  psggConverterLib.dll converted from MainControl.xlsx. 
 public partial class MainControl : StateManager {
 
-    public void Start()
+    public override void Start()
     {
         Goto(S_START);
     }
+
+    public override bool IsEnd()
+    {
+        return CheckState(S_END);
+    }
+
 
 
     /*

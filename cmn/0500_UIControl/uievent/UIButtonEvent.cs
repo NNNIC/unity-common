@@ -16,7 +16,7 @@ public class UIButtonEvent : MonoBehaviour {
 
     public void PushDown()
     {
-        MainStateEvent.Push(MainStateEventId.BUTTON, name);
+        MainEventMachine.V.PushEvent( MainStateEventId.BUTTON, this.name);
     }
 
 }

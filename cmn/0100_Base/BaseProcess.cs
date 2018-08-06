@@ -9,22 +9,22 @@ public class BaseProcess : MonoBehaviour {
     [HideInInspector]
     public ProcessState m_state = ProcessState.UNKNOWN;
 
-    public void ReqStart()
+    public void Kick()
     {
-        m_state = ProcessState.STARTING;
+        m_state = ProcessState.KICKING;
     }
 
     IEnumerator Start()
     {
         V = this;
-        m_state = ProcessState.WAIT_START;
+        m_state = ProcessState.WAIT_KICK;
 
         yield return null; // 全ComponentのStart完了
 
-        while(m_state == ProcessState.WAIT_START) yield return null;
+        while(m_state == ProcessState.WAIT_KICK) yield return null;
 
         // ErrorDlg
-        ErrorDlg.V.ReqStart();
+        ErrorDlg.V.Kick();
 
         while(ErrorDlg.V.m_state != ProcessState.RUNNING) yield return null;
 

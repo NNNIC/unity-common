@@ -4,13 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UIToggleEvent : MonoBehaviour {
-
-
 	public void PushDown(bool b)
     {
 		var toggle = GetComponent<Toggle>();
-        MainStateEvent.Push(MainStateEventId.TOGGLE, HierarchyUtility.GetAbsoluteNodePath(gameObject), b);
+        MainEventMachine.V.PushEvent(MainStateEventId.TOGGLE, HierarchyUtility.GetAbsoluteNodePath(gameObject), b);
     }	
-
-
 }

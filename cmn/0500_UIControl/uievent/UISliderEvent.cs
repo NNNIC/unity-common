@@ -8,6 +8,6 @@ public class UISliderEvent : MonoBehaviour {
 	public void Change(float val)
     {
 		var slider = GetComponent<Slider>();
-        MainStateEvent.Push(MainStateEventId.SLIDER,HierarchyUtility.GetAbsoluteNodePath(gameObject), val);
+        MainEventMachine.V.PushEvent(MainStateEventId.SLIDER,HierarchyUtility.GetAbsoluteNodePath(gameObject), val);
     }	
 }

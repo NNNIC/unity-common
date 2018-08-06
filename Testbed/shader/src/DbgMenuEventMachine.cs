@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UITest01EventMachine : MonoBehaviour, UIEventMachineInterface {
+public class DbgMenuEventMachine : MonoBehaviour, UIEventMachineInterface {
 
-    EventMachine                  m_em;
-    UITest01Control               m_sm { get { return (UITest01Control)m_em.m_sm; } }
+    EventMachine                 m_em;
+    DbgMenuControl               m_sm { get { return (DbgMenuControl)m_em.m_sm; } }
 
     public Canvas m_target;
-    public Canvas m_template;
+    public Canvas m_template;   
 
 	void Start () {
-		m_em = new EventMachine(typeof(UITest01Control));
+		m_em = new EventMachine(typeof(DbgMenuControl));
 	}
 	
 	void Update () {

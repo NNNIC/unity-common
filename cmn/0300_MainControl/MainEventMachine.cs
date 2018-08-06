@@ -6,12 +6,12 @@ public class MainEventMachine : MonoBehaviour {
 
     public static MainEventMachine V;
 
-    EventMachine<MainControl> m_em;
+    EventMachine m_em;
 
     private void Start()
     {
         V = this;
-        m_em = new EventMachine<MainControl>();
+        m_em = new EventMachine(typeof(MainControl));
         m_em.Start();
     }
 	
@@ -28,9 +28,9 @@ public class MainEventMachine : MonoBehaviour {
         var ev = new MainStateEvent(iid,iname,iobj);
         m_em.EventMan.Push(ev);
     }
-    //public MainStateEvent CurEvent { get {
-    //    var cur = m_em.EventMan.CUR;
-    //    if (cur!=null) return (MainStateEvent)cur;
-    //    return null;
-    //} }
+    public void PushEvent(MainStateEventId iid, object icontrol, string iname, object iobj=null)
+    {
+        var ev = new MainStateEvent(iid,icontrol,iname,iobj);
+        m_em.EventMan.Push(ev);
+    }
 }

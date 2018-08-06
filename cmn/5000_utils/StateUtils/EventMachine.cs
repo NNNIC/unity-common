@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-public class EventMachine<T> where T: StateManager {
+public class EventMachine {
 
     #region event manager
     protected EventManager m_evman;
@@ -14,11 +14,12 @@ public class EventMachine<T> where T: StateManager {
     #region constructor
     public  StateManager m_sm { get; private set; }
 
-    public EventMachine()
+    public EventMachine(Type t)
     {
-        m_sm = (StateManager)Activator.CreateInstance<T>();
+        m_sm = (StateManager)Activator.CreateInstance(t);
         m_evman = new EventManager();
         m_sm.SetEventMan(m_evman);
+
     }
     #endregion
 

@@ -205,6 +205,7 @@ public partial class UITest01Control : UIControlApi {
             set_size(200,50);
             set_pos(0,-500);
             set_text("BUT05");
+    		set_action(()=>{ErrorDlg.V.SetError("test");});
         }
         set_event();
         if (!HasNextState())
@@ -344,11 +345,26 @@ public partial class UITest01Control : UIControlApi {
         set_event();
         if (!HasNextState())
         {
-            SetNextState(S_END);
+            SetNextState(S_EVENT_PROCESS);
         }
         if (HasNextState())
         {
                 NoWait();
+            GoNextState();
+        }
+    }
+    /*
+        S_EVENT_PROCESS
+        イベント処理
+    */
+    void S_EVENT_PROCESS(bool bFirst)
+    {
+        if (bFirst)
+        {
+        }
+        check_event_and_perform();
+        if (HasNextState())
+        {
             GoNextState();
         }
     }

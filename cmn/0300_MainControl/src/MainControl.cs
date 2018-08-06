@@ -27,39 +27,16 @@ public partial class MainControl  {
         UIControl.V.Kick();
     }
 
-    string m_dbgmenu_buttonname;
-    void br_DBGMENU(Action<bool> st)
+    void check_event_and_dispatch()
     {
-        if (!HasNextState())
+        var cur = (MainStateEvent)m_eventman.CUR;
+        if (cur!=null && cur.control!=null)
         {
-            var cur = (MainStateEvent)m_eventman.CUR;
-            if (cur!=null && cur.id == MainStateEventId.BUTTON && DbgMenuControl.V!=null && DbgMenuControl.V.IsDbgMenuAction(cur.name))
-            { 
-                m_dbgmenu_buttonname = cur.name;
-                SetNextState(st);
+            var p = (StateManagerGetEventManInterface)cur.control;
+            if (p!=null)
+            {
+                p.GetEventMan().Push(cur);
             }
         }
     }
-    void exec_dbgmenu()
-    {
-        DbgMenuControl.V.CallAction(m_dbgmenu_buttonname);
-    }
-
-	void br_BUT05(Action<bool> st)
-    {
-        if (!HasNextState())
-        {
-            var cur = (MainStateEvent)m_eventman.CUR;
-            if (cur!=null && cur.id == MainStateEventId.BUTTON && cur.name == "BUT05" )
-            { 
-                SetNextState(st);
-            }
-        }
-    }
-
-    void disp_error()
-    {
-        ErrorDlg.V.SetError("test");
-    }
-
 }

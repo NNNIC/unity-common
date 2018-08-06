@@ -8,8 +8,8 @@ public class EventManager {
     public object CUR { get; private set; }
 
     public bool existEvent { get { return m_eventlist!=null && m_eventlist.Count > 0; } }
-    public int  countEvent { get { return m_eventlist!=null ? m_eventlist.Count : 0; } }
-        
+    public int  countEvent { get { return m_eventlist!=null ? m_eventlist.Count : 0;  } }
+
     public EventManager()
     {
         m_eventlist = new Queue<object>();

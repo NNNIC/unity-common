@@ -34,8 +34,19 @@ public class UIControl : MonoBehaviour {
         UISpriteManager.V.Kick();
         while(UISpriteManager.V.m_state != ProcessState.RUNNING) yield return null;
 
-        var em = GetComponent<UITest01EventMachine>();
-        em.SetTarget_TemplateAndStart();
+        UIEventMachineInterface p = null;
+        foreach(var c in  GetComponents<MonoBehaviour>())
+        {
+            var cand = c as UIEventMachineInterface;
+            if (cand!=null)
+            {
+                p = cand;
+                break;
+            }
+        }
+
+        p.SetTarget_TemplateAndStart();
+
         m_state = ProcessState.RUNNING;
 
         UnityEngine.Debug.Log("..END !!");

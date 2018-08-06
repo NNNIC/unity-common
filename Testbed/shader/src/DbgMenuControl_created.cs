@@ -94,10 +94,7 @@ public partial class DbgMenuControl : UIControlApi {
         if (bFirst)
         {
         }
-        if (!HasNextState())
-        {
-            SetNextState(S_END);
-        }
+        check_event_and_perform();
         if (HasNextState())
         {
             GoNextState();
@@ -117,6 +114,7 @@ public partial class DbgMenuControl : UIControlApi {
             set_size(IT.W, IT.H);
             set_pos(IT.X,IT.Y);
             set_text(IT.TEXT);
+            set_action(IT.CB);
         }
         set_event();
         if (!HasNextState())

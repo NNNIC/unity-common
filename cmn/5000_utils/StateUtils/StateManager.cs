@@ -1,8 +1,8 @@
 using System;
 using UnityEngine;
-public class StateManager
+public class StateManager : StateManagerGetEventManInterface
 {
-    protected EventManager m_eventman;
+    public EventManager m_eventman { get; private set; }
 
     Action<bool> m_curfunc;
     Action<bool> m_nextfunc;
@@ -14,6 +14,7 @@ public class StateManager
     public virtual bool IsEnd() {  return true; }
 
     public void SetEventMan(EventManager eventman) { m_eventman = eventman; }
+    public EventManager GetEventMan() { return m_eventman; }
 
     public void update()
     {

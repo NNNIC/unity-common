@@ -96,62 +96,7 @@ public partial class MainControl : StateManager {
         }
         if (!HasNextState())
         {
-            SetNextState(S_WAIT_BUT);
-        }
-        if (HasNextState())
-        {
-            GoNextState();
-        }
-    }
-    /*
-        S_WAIT_BUT
-        Wait for new button
-    */
-    void S_WAIT_BUT(bool bFirst)
-    {
-        if (bFirst)
-        {
-        }
-        br_DBGMENU(S_EXEC_DBGMENU);
-        br_BUT05(S_DISPEROR);
-        if (HasNextState())
-        {
-                NoWait();
-            GoNextState();
-        }
-    }
-    /*
-        S_DISPEROR
-        Diplay Error
-    */
-    void S_DISPEROR(bool bFirst)
-    {
-        if (bFirst)
-        {
-            disp_error();
-        }
-        if (!HasNextState())
-        {
-            SetNextState(S_WAIT_BUT);
-        }
-        if (HasNextState())
-        {
-            GoNextState();
-        }
-    }
-    /*
-        S_EXEC_DBGMENU
-        デバッグメニューの実行
-    */
-    void S_EXEC_DBGMENU(bool bFirst)
-    {
-        if (bFirst)
-        {
-            exec_dbgmenu();
-        }
-        if (!HasNextState())
-        {
-            SetNextState(S_WAIT_BUT);
+            SetNextState(S_EVENT_PROC);
         }
         if (HasNextState())
         {
@@ -172,6 +117,21 @@ public partial class MainControl : StateManager {
         {
             SetNextState(S_WAIT_BASE_READY);
         }
+        if (HasNextState())
+        {
+            GoNextState();
+        }
+    }
+    /*
+        S_EVENT_PROC
+        イベント処理
+    */
+    void S_EVENT_PROC(bool bFirst)
+    {
+        if (bFirst)
+        {
+        }
+        check_event_and_dispatch();
         if (HasNextState())
         {
             GoNextState();

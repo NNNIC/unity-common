@@ -1,8 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class UIButtonEvent : MonoBehaviour {
+
+    public object m_control;
 
 	// Use this for initialization
 	void Start () {
@@ -16,7 +19,7 @@ public class UIButtonEvent : MonoBehaviour {
 
     public void PushDown()
     {
-        MainEventMachine.V.PushEvent( MainStateEventId.BUTTON, this.name);
+        MainEventMachine.V.PushEvent( MainStateEventId.BUTTON, m_control, this.name);
     }
 
 }

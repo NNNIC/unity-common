@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class UGuiAppUtil : MonoBehaviour {
 
@@ -23,7 +24,7 @@ public class UGuiAppUtil : MonoBehaviour {
 			//setup_imported_ui_button( child );
 		}
 	}
-	public static void setup_imported_ui_button( Transform t)
+	public static void setup_imported_ui_button(Transform t, object control=null)
 	{
 		var list = new List<Button>();
 		HierarchyUtility.TraverseComponent<Button>(t, i=>{
@@ -32,10 +33,11 @@ public class UGuiAppUtil : MonoBehaviour {
 		foreach(var i in list)
 		{
 			var but = ComponentUtil.AddComponentIfNotExist<UIButtonEvent>(i.gameObject);
+            but.m_control = control;
 			i.onClick.AddListener(but.PushDown);
 		}
 	}
-	public static void setup_imported_ui_toggle( Transform t)
+	public static void setup_imported_ui_toggle( Transform t, object control = null)
 	{
 		var list = new List<Toggle>();
 		HierarchyUtility.TraverseComponent<Toggle>(t, i=>{
@@ -44,10 +46,11 @@ public class UGuiAppUtil : MonoBehaviour {
 		foreach(var i in list)
 		{
 			var but = ComponentUtil.AddComponentIfNotExist<UIToggleEvent>(i.gameObject);
+            but.m_control = control;
 			i.onValueChanged.AddListener(but.PushDown);
 		}
 	}
-	public static void setup_imported_ui_slider( Transform t)
+	public static void setup_imported_ui_slider( Transform t, object control = null)
 	{
 		var list = new List<Slider>();
 		HierarchyUtility.TraverseComponent<Slider>(t, i=>{
@@ -56,10 +59,11 @@ public class UGuiAppUtil : MonoBehaviour {
 		foreach(var i in list)
 		{
 			var slider = ComponentUtil.AddComponentIfNotExist<UISliderEvent>(i.gameObject);
+            slider.m_control = control;
 			i.onValueChanged.AddListener(slider.Change);
 		}
 	}
-	public static void setup_imported_ui_scrollbar( Transform t)
+	public static void setup_imported_ui_scrollbar( Transform t, object control=null)
 	{
 		var list = new List<Scrollbar>();
 		HierarchyUtility.TraverseComponent<Scrollbar>(t, i=>{
@@ -68,10 +72,11 @@ public class UGuiAppUtil : MonoBehaviour {
 		foreach(var i in list)
 		{
 			var scrollbar = ComponentUtil.AddComponentIfNotExist<UIScrollbarEvent>(i.gameObject);
+            scrollbar.m_control = control;
 			i.onValueChanged.AddListener(scrollbar.Change);
 		}
 	}
-	public static void setup_imported_ui_inputfield( Transform t)
+	public static void setup_imported_ui_inputfield( Transform t, object control=null)
 	{
 		var list = new List<InputField>();
 		HierarchyUtility.TraverseComponent<InputField>(t, i=>{
@@ -80,11 +85,12 @@ public class UGuiAppUtil : MonoBehaviour {
 		foreach(var i in list)
 		{
 			var inputfield = ComponentUtil.AddComponentIfNotExist<UIInputFieldEvent>(i.gameObject);
+            inputfield.m_control = control;
 			i.onValueChanged.AddListener(inputfield.Change);
 			i.onEndEdit.AddListener(inputfield.End);
 		}
 	}
-	public static void setup_imported_ui_scrollview(Transform t)
+	public static void setup_imported_ui_scrollview(Transform t, object control=null)
 	{
 		var list = new List<ScrollRect>();
 		HierarchyUtility.TraverseComponent<ScrollRect>(t, i=>{
@@ -93,9 +99,9 @@ public class UGuiAppUtil : MonoBehaviour {
 		foreach(var i in list)
 		{
 			var scrollviewevent = ComponentUtil.AddComponentIfNotExist<UIScrollViewEvent>(i.gameObject);
+            scrollviewevent.m_control = control;
 			i.onValueChanged.AddListener(scrollviewevent.Change);
 		}
-
 	}
 	
 

@@ -7,11 +7,14 @@ public class UIControlApi : StateManager {
     protected Canvas m_target;
     protected Canvas m_template;
 
+    protected string     m_partsname;
     protected GameObject m_parent;
     protected GameObject m_latest;
     protected RectTransform m_latest_rt;
 
     protected bool m_yesno;
+
+    protected Dictionary<string, Action> m_action_dic;
 
     public void SetTargetAndTemplate(Canvas target, Canvas template)
     {
@@ -32,6 +35,7 @@ public class UIControlApi : StateManager {
             clone.name = parts;
             m_latest = clone;
             m_latest_rt = m_latest.GetComponent<RectTransform>();
+            m_partsname = parts;
         }
         else
         {
@@ -76,14 +80,23 @@ public class UIControlApi : StateManager {
             UGuiUtil.SetSprite(m_latest_rt,sprite);
         }
     }
+    protected void set_action(Action act)
+    {
+        if (m_action_dic==null) m_action_dic = new Dictionary<string, Action>();
+        if (m_action_dic.ContainsKey(m_partsname))
+        {
+            throw new SystemException("Unexpected! {846E922C-8885-4BFE-8183-BBF599E3D4A8}");
+        }
+        m_action_dic.Add(m_partsname,act);
+    }
     protected void set_event()
     {
-        UGuiAppUtil.setup_imported_ui_button(m_latest.transform);
-        UGuiAppUtil.setup_imported_ui_toggle(m_latest.transform);
-        UGuiAppUtil.setup_imported_ui_slider(m_latest.transform);
-        UGuiAppUtil.setup_imported_ui_scrollbar(m_latest.transform);
-        UGuiAppUtil.setup_imported_ui_inputfield(m_latest.transform);
-        UGuiAppUtil.setup_imported_ui_scrollview(m_latest.transform);
+        UGuiAppUtil.setup_imported_ui_button(m_latest.transform, this);
+        UGuiAppUtil.setup_imported_ui_toggle(m_latest.transform, this);
+        UGuiAppUtil.setup_imported_ui_slider(m_latest.transform, this);
+        UGuiAppUtil.setup_imported_ui_scrollbar(m_latest.transform, this);
+        UGuiAppUtil.setup_imported_ui_inputfield(m_latest.transform, this);
+        UGuiAppUtil.setup_imported_ui_scrollview(m_latest.transform, this);
     }
     protected bool _get_anchorpos(string anchorstr, out float x, out float y)
     {
@@ -133,4 +146,19 @@ public class UIControlApi : StateManager {
             if (!m_yesno) SetNextState(st);
         }
     }
+
+    #region event process
+    protected void check_event_and_perform()
+    {
+        var cur = (MainStateEvent)m_eventman.CUR;
+        if (cur!=null &&  m_action_dic.ContainsKey(cur.name))
+        {
+            var act = m_action_dic[cur.name];
+            if (act!=null)
+            {
+                act();
+            }
+        }
+    }
+    #endregion
 }

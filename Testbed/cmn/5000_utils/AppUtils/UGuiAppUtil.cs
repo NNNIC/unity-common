@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System;
 
@@ -21,7 +22,6 @@ public class UGuiAppUtil : MonoBehaviour {
 		{
 			var child = template.transform.GetChild(i);
 			setup_imported_ui_sprite( child );
-			//setup_imported_ui_button( child );
 		}
 	}
 	public static void setup_imported_ui_button(Transform t, object control=null)
@@ -32,9 +32,14 @@ public class UGuiAppUtil : MonoBehaviour {
 		});
 		foreach(var i in list)
 		{
+            var et = ComponentUtil.AddComponentIfNotExist<EventTrigger>(i.gameObject);  // Use Event Trigger! (Default Event is not safe under static object.)
 			var but = ComponentUtil.AddComponentIfNotExist<UIButtonEvent>(i.gameObject);
             but.m_control = control;
-			i.onClick.AddListener(but.PushDown);
+            
+            var entry = new EventTrigger.Entry();
+            entry.eventID = EventTriggerType.PointerDown;
+            entry.callback.AddListener((data)=> { but.PushDown(); });
+            et.triggers.Add(entry);
 		}
 	}
 	public static void setup_imported_ui_toggle( Transform t, object control = null)
@@ -47,7 +52,9 @@ public class UGuiAppUtil : MonoBehaviour {
 		{
 			var but = ComponentUtil.AddComponentIfNotExist<UIToggleEvent>(i.gameObject);
             but.m_control = control;
+            
 			i.onValueChanged.AddListener(but.PushDown);
+
 		}
 	}
 	public static void setup_imported_ui_slider( Transform t, object control = null)

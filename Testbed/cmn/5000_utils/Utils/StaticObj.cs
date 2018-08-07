@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class StaticObj : MonoBehaviour {
 
+    public StaticObj V;
+
 	void Start () {
+        V = this;
 		GameObject.DontDestroyOnLoad(gameObject);
 	}
 	

@@ -1,12 +1,11 @@
-﻿//  psggConverterLib.dll converted from MainControl.xlsx. 
-public partial class MainControl : StateManager {
+﻿//  psggConverterLib.dll converted from AssetBundleControl.xlsx. 
+public partial class AssetBundleControl : StateManager {
 
-    public override void Start()
+    public void Start()
     {
         Goto(S_START);
     }
-
-    public override bool IsEnd()
+    public bool IsEnd()
     {
         return CheckState(S_END);
     }
@@ -15,7 +14,6 @@ public partial class MainControl : StateManager {
 
     /*
         S_START
-        開始
     */
     void S_START(bool bFirst)
     {
@@ -24,7 +22,7 @@ public partial class MainControl : StateManager {
         }
         if (!HasNextState())
         {
-            SetNextState(S_APP_INIT_START);
+            SetNextState(S_WAIT_READY);
         }
         if (HasNextState())
         {
@@ -33,7 +31,6 @@ public partial class MainControl : StateManager {
     }
     /*
         S_END
-        終了
     */
     void S_END(bool bFirst)
     {
@@ -46,18 +43,17 @@ public partial class MainControl : StateManager {
         }
     }
     /*
-        S_WAIT_BASE_READY
-        BASEの準備待ち
+        S_WAIT_READY
+        通信環境準備待ち
     */
-    void S_WAIT_BASE_READY(bool bFirst)
+    void S_WAIT_READY(bool bFirst)
     {
         if (bFirst)
         {
         }
-        if (!base_isready()) return;
         if (!HasNextState())
         {
-            SetNextState(S_BASE_INIT);
+            SetNextState(S_GET_FILELIST_ONNET);
         }
         if (HasNextState())
         {
@@ -65,19 +61,33 @@ public partial class MainControl : StateManager {
         }
     }
     /*
-        S_BASE_INIT
-        ベース初期化
+        S_CACHE_CHECK
+        常駐および既存ファイルの更新必要性確認
     */
-    void S_BASE_INIT(bool bFirst)
+    void S_CACHE_CHECK(bool bFirst)
     {
         if (bFirst)
         {
-            base_init();
         }
-        if (!base_init_done()) return;
+        br_NeedUpdate(S_UPDATEFILES);
+        br_NotNeedUpdate(S_WAIT_REQUEST);
+        if (HasNextState())
+        {
+            GoNextState();
+        }
+    }
+    /*
+        S_GET_FILELIST_ONNET
+        ネットよりファイルリストを取得
+    */
+    void S_GET_FILELIST_ONNET(bool bFirst)
+    {
+        if (bFirst)
+        {
+        }
         if (!HasNextState())
         {
-            SetNextState(S_UI_START);
+            SetNextState(S_CACHE_CHECK);
         }
         if (HasNextState())
         {
@@ -85,18 +95,17 @@ public partial class MainControl : StateManager {
         }
     }
     /*
-        S_UI_START
-        UI開始
+        S_WAIT_REQUEST
+        要求待ち
     */
-    void S_UI_START(bool bFirst)
+    void S_WAIT_REQUEST(bool bFirst)
     {
         if (bFirst)
         {
-            ui_start();
         }
         if (!HasNextState())
         {
-            SetNextState(S_EVENT_PROC);
+            SetNextState(S_GET_FILES);
         }
         if (HasNextState())
         {
@@ -104,18 +113,17 @@ public partial class MainControl : StateManager {
         }
     }
     /*
-        S_APP_INIT_START
-        アプリ側初期化開始
+        S_UPDATEFILES
+        ファイル更新
     */
-    void S_APP_INIT_START(bool bFirst)
+    void S_UPDATEFILES(bool bFirst)
     {
         if (bFirst)
         {
-            app_init_start();
         }
         if (!HasNextState())
         {
-            SetNextState(S_WAIT_BASE_READY);
+            SetNextState(S_WAIT_REQUEST);
         }
         if (HasNextState())
         {
@@ -123,15 +131,18 @@ public partial class MainControl : StateManager {
         }
     }
     /*
-        S_EVENT_PROC
-        イベント処理
+        S_GET_FILES
+        指定ファイルの取得
     */
-    void S_EVENT_PROC(bool bFirst)
+    void S_GET_FILES(bool bFirst)
     {
         if (bFirst)
         {
         }
-        check_event_and_dispatch();
+        if (!HasNextState())
+        {
+            SetNextState(S_WAIT_REQUEST);
+        }
         if (HasNextState())
         {
             GoNextState();

@@ -12,23 +12,20 @@ public class UISpriteManager : MonoBehaviour {
     public List<Sprite> m_sprite_list;
 
     public static UISpriteManager V;
-    [HideInInspector]
-    public ProcessState m_state = ProcessState.UNKNOWN;
-    
-    public void Kick()
+
+    void Start()
     {
-        m_state = ProcessState.KICKING;
+        V = this;
+    }
+    Action m_cb;
+    public void Kick(Action cb)
+    {
+        m_cb = cb;
+        StartCoroutine(kick_co());
     }
 
 	// Use this for initialization
-	IEnumerator Start () {
-        V = this;
-        m_state = ProcessState.WAIT_KICK;
-        
-        yield return null; // 全ComponentのStart完了
-
-        while(m_state == ProcessState.WAIT_KICK) yield return null;
-
+	IEnumerator kick_co() {
         if (m_sprite_texure_resources==null || m_sprite_texure_resources.Length == 0)
         {
             ErrorDlg.V.SetError("Unexpected. {7272B075-E326-4029-B878-39C3985A65EA}");
@@ -58,7 +55,7 @@ public class UISpriteManager : MonoBehaviour {
             yield break;
         }
 
-        m_state = ProcessState.RUNNING;
+        if (m_cb!=null) m_cb();
 	}
 
     public Sprite GetSprite(string sprite_name)

@@ -1,35 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class BaseProcess : MonoBehaviour {
 
     public static BaseProcess V;
 
-    [HideInInspector]
-    public ProcessState m_state = ProcessState.UNKNOWN;
-
-    public void Kick()
-    {
-        m_state = ProcessState.KICKING;
-    }
-
-    IEnumerator Start()
+    void Start()
     {
         V = this;
-        m_state = ProcessState.WAIT_KICK;
+    }
 
-        yield return null; // 全ComponentのStart完了
+    
+    Action m_cb;
+    public void Kick(Action cb)
+    {
+        m_cb = cb;
+        StartCoroutine(kick_co());
+    }
 
-        while(m_state == ProcessState.WAIT_KICK) yield return null;
-
+    IEnumerator kick_co()
+    {
+        var bOk = false;
         // ErrorDlg
-        ErrorDlg.V.Kick();
+        ErrorDlg.V.Kick(()=>bOk=true);
 
-        while(ErrorDlg.V.m_state != ProcessState.RUNNING) yield return null;
+        while(bOk==false) yield return null;
 
         //
-        m_state = ProcessState.RUNNING;
+        if (m_cb!=null) m_cb();
     }
 
 }

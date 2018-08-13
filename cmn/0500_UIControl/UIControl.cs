@@ -12,27 +12,24 @@ public class UIControl : MonoBehaviour {
 
     public static UIControl V;
 
-    #region process
-    [HideInInspector]
-    public ProcessState m_state = ProcessState.UNKNOWN;    
-    public void Kick()
+    void Start()
     {
-        m_state = ProcessState.KICKING;
-    }
-    #endregion
-
-    IEnumerator Start () {
         V = this;
-        m_state = ProcessState.WAIT_KICK;
+    }
 
-        yield return null; // 全ComponentのStart完了
+    Action m_cb;
+    public void Kick(Action cb)
+    {
+        m_cb = cb;
+        StartCoroutine(kick_co());
+    }
 
-        while(m_state == ProcessState.WAIT_KICK) yield return null;
-        
+    IEnumerator kick_co() {
+
         Debug.Log("..Start !");
-
-        UISpriteManager.V.Kick();
-        while(UISpriteManager.V.m_state != ProcessState.RUNNING) yield return null;
+        var bOk = false;
+        UISpriteManager.V.Kick(()=>bOk = true);
+        while(bOk==false) yield return null;
 
         UIEventMachineInterface p = null;
         foreach(var c in  GetComponents<MonoBehaviour>())
@@ -47,8 +44,7 @@ public class UIControl : MonoBehaviour {
 
         p.SetTarget_TemplateAndStart();
 
-        m_state = ProcessState.RUNNING;
-
+        if (m_cb!=null) m_cb();
         UnityEngine.Debug.Log("..END !!");
 	}
 	

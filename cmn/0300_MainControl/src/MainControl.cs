@@ -14,17 +14,21 @@ public partial class MainControl  {
         return BaseProcess.V!=null;
     }
 
+    bool m_baseOk = false;
     void base_init() {
-        BaseProcess.V.Kick();
+        m_baseOk = false;
+        BaseProcess.V.Kick(()=>m_baseOk = true);
     }
 
     bool base_init_done()
     {
-        return BaseProcess.V.m_state == ProcessState.RUNNING;
+        return m_baseOk;
     }
 
+    bool m_uiOk = false;
     void ui_start() {
-        UIControl.V.Kick();
+        m_uiOk = false;
+        UIControl.V.Kick(()=>m_uiOk=true);
     }
 
     void check_event_and_dispatch()

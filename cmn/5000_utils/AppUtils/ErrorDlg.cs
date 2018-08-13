@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ErrorDlg : MonoBehaviour {
 
@@ -12,24 +13,23 @@ public class ErrorDlg : MonoBehaviour {
     public GameObject m_canvas;
     public GameObject m_template;
 
-    [HideInInspector]
-    public ProcessState m_state = ProcessState.UNKNOWN;
-
-    public void Kick()
+    private void Start()
     {
-        m_state = ProcessState.KICKING;
+        V = this;        
     }
 
-    IEnumerator Start()
+    Action m_cb;
+    public void Kick(Action cb)
     {
-        V = this;
-        m_state = ProcessState.WAIT_KICK;
+        m_cb = cb;
+        StartCoroutine(kick_co());
+    }
 
+    IEnumerator kick_co()
+    {
         yield return null; // 全ComponentのStart完了
 
-        while(m_state == ProcessState.WAIT_KICK) yield return null;
-
-        m_state = ProcessState.RUNNING;
+        if (m_cb!=null) m_cb(); // ready!
 
         while(true) // Update
         { 

@@ -9,21 +9,22 @@ public partial class MainControl  {
 		if (m_app_init_start!=null) m_app_init_start();
 	}
 
-    bool base_isready()
+    #region base initialization
+    BaseControl m_base_mc;
+    void base_init()
     {
-        return BaseProcess.V!=null;
+        m_base_mc = new BaseControl();
+        m_base_mc.Start();
     }
-
-    bool m_baseOk = false;
-    void base_init() {
-        m_baseOk = false;
-        BaseProcess.V.Kick(()=>m_baseOk = true);
+    void base_update()
+    {
+        m_base_mc.update();
     }
-
     bool base_init_done()
     {
-        return m_baseOk;
+        return m_base_mc.IsEnd();
     }
+    #endregion
 
     bool m_uiOk = false;
     void ui_start() {

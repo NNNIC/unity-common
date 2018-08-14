@@ -54,7 +54,6 @@ public partial class MainControl : StateManager {
         if (bFirst)
         {
         }
-        if (!base_isready()) return;
         if (!HasNextState())
         {
             SetNextState(S_BASE_INIT);
@@ -74,6 +73,7 @@ public partial class MainControl : StateManager {
         {
             base_init();
         }
+        base_update();
         if (!base_init_done()) return;
         if (!HasNextState())
         {

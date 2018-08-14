@@ -1,6 +1,6 @@
 ﻿using System;
-public partial class AssetBundleFileLoadControl  {
-	
+public partial class BaseControl  {
+
 	bool m_bYesNo;
 	
 	void br_YES(Action<bool> st)
@@ -24,19 +24,16 @@ public partial class AssetBundleFileLoadControl  {
 			}
 		}
 	}
-	
-	
-	// write your code 
-	void br_ERROR(Action<bool> st)
-	{
-	}
-
-	void br_RETRY(Action<bool> st)
-	{
-			//TODO
-	}
-	void br_RETRYMAX(Action<bool> st)
-	{
-	}
+    
+    bool m_errordlg_done;
+    void errordlg_init()
+    {
+        m_errordlg_done = false;
+        ErrorDlg.V.Kick(()=> { m_errordlg_done = true;});
+    }	
+    bool errordlg_isdone()
+    {
+        return m_errordlg_done;
+    }
 
 }

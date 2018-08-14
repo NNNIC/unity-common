@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class StaticObj : MonoBehaviour {
 
-    public StaticObj V;
+    public static StaticObj V;
+    public GameObject baseRoot;
 
 	void Start () {
         V = this;

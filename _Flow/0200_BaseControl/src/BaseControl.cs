@@ -36,4 +36,10 @@ public partial class BaseControl  {
         return m_errordlg_done;
     }
 
+    void fade_init()
+    {
+        var go = Fade.Create();
+        go.transform.parent = StaticObj.V.baseRoot.transform;
+    }
+
 }

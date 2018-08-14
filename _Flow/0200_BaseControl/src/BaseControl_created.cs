@@ -110,6 +110,25 @@ public partial class BaseControl : StateManager {
         }
         if (!HasNextState())
         {
+            SetNextState(S_FADE_INIT);
+        }
+        if (HasNextState())
+        {
+            GoNextState();
+        }
+    }
+    /*
+        S_FADE_INIT
+        フェード初期化
+    */
+    void S_FADE_INIT(bool bFirst)
+    {
+        if (bFirst)
+        {
+            fade_init();
+        }
+        if (!HasNextState())
+        {
             SetNextState(S_END);
         }
         if (HasNextState())

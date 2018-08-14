@@ -24,7 +24,7 @@ public partial class MainControl : StateManager {
         }
         if (!HasNextState())
         {
-            SetNextState(S_APP_INIT_START);
+            SetNextState(S_APP_PREBASE_INIT);
         }
         if (HasNextState())
         {
@@ -46,17 +46,17 @@ public partial class MainControl : StateManager {
         }
     }
     /*
-        S_WAIT_BASE_READY
-        BASEの準備待ち
+        S_APP_INIT
+        アプリ側初期化
     */
-    void S_WAIT_BASE_READY(bool bFirst)
+    void S_APP_INIT(bool bFirst)
     {
         if (bFirst)
         {
         }
         if (!HasNextState())
         {
-            SetNextState(S_BASE_INIT);
+            SetNextState(S_READY_ALL);
         }
         if (HasNextState())
         {
@@ -77,7 +77,7 @@ public partial class MainControl : StateManager {
         if (!base_init_done()) return;
         if (!HasNextState())
         {
-            SetNextState(S_READY_ALL);
+            SetNextState(S_APP_INIT);
         }
         if (HasNextState())
         {
@@ -122,18 +122,18 @@ public partial class MainControl : StateManager {
         }
     }
     /*
-        S_APP_INIT_START
-        アプリ側初期化開始
+        S_APP_PREBASE_INIT
+        BASEより先に初期化するＡＰＰ用
     */
-    void S_APP_INIT_START(bool bFirst)
+    void S_APP_PREBASE_INIT(bool bFirst)
     {
         if (bFirst)
         {
-            app_init_start();
+            app_prebase_init();
         }
         if (!HasNextState())
         {
-            SetNextState(S_WAIT_BASE_READY);
+            SetNextState(S_BASE_INIT);
         }
         if (HasNextState())
         {

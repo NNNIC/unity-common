@@ -4,7 +4,7 @@ public partial class MainControl  {
 
 	//app側連携
 	public static Action m_app_init_start;
-	void app_init_start()
+	void app_prebase_init()
 	{
 		if (m_app_init_start!=null) m_app_init_start();
 	}

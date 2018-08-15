@@ -1,6 +1,12 @@
 ﻿using System;
+using UnityEngine.SceneManagement;
 
 public partial class MainControl  {
+
+    void appscene_go()
+    {
+        //SceneManager.LoadScene("app");
+    }
 
 	//app側連携
 	public static Action m_app_init_start;

@@ -24,7 +24,7 @@ public partial class MainControl : StateManager {
         }
         if (!HasNextState())
         {
-            SetNextState(S_APP_PREBASE_INIT);
+            SetNextState(S_GOTO_APPSCENE);
         }
         if (HasNextState())
         {
@@ -115,6 +115,25 @@ public partial class MainControl : StateManager {
         if (!HasNextState())
         {
             SetNextState(S_UI_START);
+        }
+        if (HasNextState())
+        {
+            GoNextState();
+        }
+    }
+    /*
+        S_GOTO_APPSCENE
+        Appシーンへ移動
+    */
+    void S_GOTO_APPSCENE(bool bFirst)
+    {
+        if (bFirst)
+        {
+            appscene_go();
+        }
+        if (!HasNextState())
+        {
+            SetNextState(S_APP_PREBASE_INIT);
         }
         if (HasNextState())
         {

@@ -13,29 +13,6 @@ public class UICanvasCameraSetup : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-#if screen_s
-        m_height = Screen.height;
-        m_width  = Screen.width;
-
-        var tr  = m_canvas.GetComponent<RectTransform>();
-
-        // カメラセットアップ
-        m_canvas.worldCamera = m_cam;
-
-        m_cam.orthographic     = true;
-        m_cam.orthographicSize = m_height * 0.5f;
-
-        m_cam.transform.position = VectorUtil.Add_Z(tr.position,-100); 
- 
-        // RectTransfromセットアップ
-        //tr.localScale = Vector3.right * m_width + Vector3.up * m_height;
-        tr.anchorMin = Vector2.zero;
-        tr.anchorMax = Vector2.zero;
-        tr.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, m_width);
-        tr.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,   m_height);
-        tr.SetPositionAndRotation(new Vector3(m_width * 0.5f, m_height * 0.5f),Quaternion.identity);
-#endif
-
         ScreenDef.screen_height = Screen.height;
         ScreenDef.screen_width  = Screen.width;
 

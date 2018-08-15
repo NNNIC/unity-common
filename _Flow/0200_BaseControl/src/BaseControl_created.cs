@@ -51,6 +51,7 @@ public partial class BaseControl : StateManager {
     {
         if (bFirst)
         {
+            LogHandler.Create();
         }
         if (!HasNextState())
         {

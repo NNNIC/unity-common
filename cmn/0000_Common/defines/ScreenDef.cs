@@ -89,4 +89,21 @@ public class ScreenDef {
 
         } }
     #endregion
+
+    public static float GetRealSize(float x) //リファレンスサイズ(横幅を６４０)のＸ値の実値を得る
+    {
+        if (is_graterthan_reference_min_ratio)
+        {
+            var w = reference_width;
+            if (is_reference_simple_hight_graterthan_max)
+            {
+                w = reference_width_w_margin;
+            }
+            return screen_width / w * x;
+        }
+        else
+        {
+            return screen_height / reference_height_min * x;
+        }
+    }
 }

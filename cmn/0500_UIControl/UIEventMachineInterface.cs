@@ -5,5 +5,6 @@ using UnityEngine;
 public interface UIEventMachineInterface {
 
     void SetTarget_TemplateAndStart();
+    bool IsReady();
 
 }

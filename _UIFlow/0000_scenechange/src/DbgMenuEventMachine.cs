@@ -10,8 +10,12 @@ public class DbgMenuEventMachine : MonoBehaviour, UIEventMachineInterface {
     public Canvas m_target;
     public Canvas m_template;   
 
+    public bool IsReady()  { return m_bReady; }
+    private bool m_bReady=false;
+
 	void Start () {
 		m_em = new EventMachine(typeof(DbgMenuControl));
+        m_bReady = true;
 	}
 	
 	void Update () {

@@ -26,7 +26,7 @@ public class Fade : MonoBehaviour
 {
     static readonly Vector3 POSITION         = Vector3.back * 10000;
     static readonly float   DEFAILT_FADETIME = 0.2f;
-    static readonly Color   FADE_COLOR       = Color.black;
+    static readonly Color   FADE_COLOR       = Color.white;
 
     #region 生成
     private static Fade V;
@@ -128,7 +128,7 @@ public class Fade : MonoBehaviour
         m_cam.farClipPlane = 10f;
         m_cam.orthographicSize = 0.5f;
         m_cam.cullingMask = 1 << LayerMask.NameToLayer("UI");
-        m_cam.depth = 40; //http://bts-sv.success-corp.lo/projects/277/wiki/%E3%82%AB%E3%83%A1%E3%83%A9%E9%96%A2%E9%80%A3
+        m_cam.depth = 40; 
         m_cam.clearFlags = CameraClearFlags.Depth;
 
         _set_alpha(0);

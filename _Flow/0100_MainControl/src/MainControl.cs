@@ -5,7 +5,7 @@ public partial class MainControl  {
 
     void appscene_go()
     {
-        //SceneManager.LoadScene("app");
+        SceneManager.LoadScene("app");
     }
 
 	//app側連携
@@ -33,8 +33,9 @@ public partial class MainControl  {
     #endregion
 
     bool m_uiOk = false;
-    void ui_start() {
+    void ui_start(string first_ui_name) {
         m_uiOk = false;
+        UIControl.V.m_firstMenuName = first_ui_name;
         UIControl.V.Kick(()=>m_uiOk=true);
     }
 

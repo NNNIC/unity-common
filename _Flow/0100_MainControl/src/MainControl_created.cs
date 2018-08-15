@@ -92,7 +92,7 @@ public partial class MainControl : StateManager {
     {
         if (bFirst)
         {
-            ui_start();
+            ui_start("dbg_uitest_01");
         }
         if (!HasNextState())
         {
@@ -114,7 +114,7 @@ public partial class MainControl : StateManager {
         }
         if (!HasNextState())
         {
-            SetNextState(S_UI_START);
+            SetNextState(S_UI_START1);
         }
         if (HasNextState())
         {
@@ -134,6 +134,25 @@ public partial class MainControl : StateManager {
         if (!HasNextState())
         {
             SetNextState(S_APP_PREBASE_INIT);
+        }
+        if (HasNextState())
+        {
+            GoNextState();
+        }
+    }
+    /*
+        S_UI_START1
+        UI開始
+    */
+    void S_UI_START1(bool bFirst)
+    {
+        if (bFirst)
+        {
+            ui_start("dbg_scene_change");
+        }
+        if (!HasNextState())
+        {
+            SetNextState(S_EVENT_PROC);
         }
         if (HasNextState())
         {

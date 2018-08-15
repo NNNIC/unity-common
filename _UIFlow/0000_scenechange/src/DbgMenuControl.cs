@@ -43,9 +43,9 @@ public partial class DbgMenuControl  {
             m_items.Add( new Item( name , -sh * m_items.Count, cb));
         }; 
 
-        regst("Scene 0", ()=> {
-            SceneManager.LoadScene(0);
-        });
+        //regst("Scene 0", ()=> {
+        //    SceneManager.LoadScene(0);
+        //});
         regst("Scene 1", ()=> {
             SceneManager.LoadScene(1);
         });
@@ -61,10 +61,19 @@ public partial class DbgMenuControl  {
         regst("Scene 5", ()=> {
             SceneManager.LoadScene(5);
         });
+        regst("FADE", ()=> {            
+            if (Fade.Alpha()==1)
+            {
+                Fade.FadeIn();
+            }
+            else
+            {
+                Fade.FadeOut();
+            }
+        });
 
-        regst("HIDE MENU 10 SEC", ()=> {
-            
-
+        regst("HIDE MENU", ()=> {
+            UIControl.V.Hide();
         });
 
 
